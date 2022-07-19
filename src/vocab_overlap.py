@@ -82,7 +82,9 @@ for f in args.files:
         f"Paper & abstract overlap size:    \
         {len(abstract_set & paper_set)} ({len(abstract_set & paper_set)/len(abstract_set):.0%})"
     )
-    positive_overlap.append(len(abstract_set & paper_set) / len(abstract_set))
+    positive_overlap.append(
+        len(abstract_set & paper_set) / len(abstract_set) * 100
+    )
     print(f"Missing words from paper: {abstract_set - paper_set}")
 
     positive_set |= paper_set
@@ -102,7 +104,7 @@ for f in args.pos_files:
     )
 
     positive_overlap.append(
-        len(abstract_set & positive_set) / len(abstract_set)
+        len(abstract_set & positive_set) / len(abstract_set) * 100
     )
     positive_set_size.append(len(positive_set))
 
@@ -122,7 +124,7 @@ for f in args.neg_files:
         {len(abstract_set & negative_set)} ({len(abstract_set & negative_set)/len(abstract_set):.0%})"
     )
     negative_overlap.append(
-        len(abstract_set & negative_set) / len(abstract_set)
+        len(abstract_set & negative_set) / len(abstract_set) * 100
     )
     negative_set_size.append(len(negative_set))
 
@@ -160,7 +162,7 @@ ax1.hlines(
 hndl1, lbls1 = ax1.get_legend_handles_labels()
 hndl2, lbls2 = ax2.get_legend_handles_labels()
 ax1.set_xlabel("Docs (cummulative)")
-ax1.set_ylabel("Vocabulary overlap between abstract and papers")
+ax1.set_ylabel("Overlap between an abstract and other papers (%)")
 ax2.set_ylabel("Vocabulary size")
 plt.legend(
     hndl1 + hndl2, lbls1 + lbls2,
