@@ -1,3 +1,9 @@
+# Added by zouharvi
+corpus
+corpus_raw
+figures
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
