@@ -1,3 +1,5 @@
 matplotlib
 tika
 tqdm
+semanticscholar
+arxiv
