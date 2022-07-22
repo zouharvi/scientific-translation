@@ -3,3 +3,13 @@ tika
 tqdm
 semanticscholar
 arxiv
+
+# fairseq-related
+torch
+cython
+fastBPE
+sacremoses
+subword_nmt
+bitarray
+sacrebleu
+ninja
