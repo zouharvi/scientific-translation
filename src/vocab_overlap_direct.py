@@ -23,7 +23,7 @@ for f in args.files:
     print(f"Processing main {f}")
     with open(f, "r") as f:
         data = json.load(f)
-    abstract_txt = data["abstract_en"]
+    abstract_txt = data["abstract_ref"]["en"]
     paper_txt = data["paper_en"]
 
     abstract_set = text_to_vocab(abstract_txt)
@@ -36,3 +36,6 @@ for f in args.files:
         {len(abstract_set & vocab_set)} ({len(abstract_set & vocab_set)/len(abstract_set):.0%})"
     )
     print(f"Missing words from vocab: {abstract_set - vocab_set}")
+
+    # with open(f.rstrip(".json") + "_v.json", "w") as f:
+    #     json.dump(data, f)

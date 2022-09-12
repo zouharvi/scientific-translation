@@ -1,7 +1,9 @@
 # Added by zouharvi
-corpus
-corpus_raw
-figures
+/corpus
+/corpus_raw
+/corpus_lindat
+/figures
+/models
 
 
 # Byte-compiled / optimized / DLL files
