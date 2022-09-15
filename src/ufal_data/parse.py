@@ -51,12 +51,13 @@ for record in tqdm(list(data_bs.find_all("Record"))):
         # this happens only 7 times
         continue
 
-    sch = semanticscholar.SemanticScholar(timeout=2)
     print("Searching for:", title_en)
     paper_data = sch_utils.paper_search(title_en)
     time.sleep(5)
-    paper_sames = [x for x in paper_data if sch_utils.is_same_paper(
-        x["title"], title_en)]
+    paper_sames = [
+        x for x in paper_data
+        if sch_utils.is_same_paper(x["title"], title_en)
+    ]
 
     # TODO: we are not using paper_sames
     print("Using search results of", len(paper_data))
@@ -76,12 +77,12 @@ for record in tqdm(list(data_bs.find_all("Record"))):
         "abstract_en": abstract_en,
     })
 
+    # constatly overwrite
+    with open("data_raw/publications.jsonl", "w") as f:
+        f.write("\n".join([
+            json.dumps(x, ensure_ascii=False)
+            for x in data
+        ]) + "\n")
+
 print("Language distribution:", data_lang)
 print("Total examples:", len(data))
-
-
-with open("data_raw/publications.jsonl", "w") as f:
-    f.write("\n".join([
-        json.dumps(x, ensure_ascii=False)
-        for x in data
-    ]))

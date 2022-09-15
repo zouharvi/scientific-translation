@@ -39,6 +39,8 @@ def crawl_until_exhausted(papers, paper_ids=set(), total=30, depth=0):
     # print("Crawling", len(papers), "papers")
     for paper in papers:
         refs = paper_references(paper["paperId"], limit=total)
+        time.sleep(3)
+
         for new_x in refs:
             if new_x["paperId"] in paper_ids:
                 continue
@@ -48,7 +50,6 @@ def crawl_until_exhausted(papers, paper_ids=set(), total=30, depth=0):
         # we may be done
         if len(papers_new) + len(papers) >= total:
             break
-        time.sleep(2)
 
     total_papers = len(papers + papers_new)
     if total_papers < total:
@@ -56,7 +57,7 @@ def crawl_until_exhausted(papers, paper_ids=set(), total=30, depth=0):
         papers_new = crawl_until_exhausted(
             papers_new, paper_ids=paper_ids,
             total=total - total_papers + len(papers_new),
-            depth=depth+1,
+            depth=depth + 1,
         )
 
     # shuffle to not be skewed towards the first paper references
