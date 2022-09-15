@@ -3,6 +3,7 @@ tika
 tqdm
 semanticscholar
 arxiv
+bs4
 
 # fairseq-related
 torch
