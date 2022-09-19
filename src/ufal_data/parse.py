@@ -7,6 +7,7 @@ import collections
 from tqdm import tqdm
 import sch_utils
 import time
+import argparse
 
 with open("data_raw/publications.xml", "r") as f:
     data_bs = f.read()
@@ -15,7 +16,11 @@ with open("data_raw/publications.xml", "r") as f:
 data = []
 data_lang = collections.Counter()
 
-for record in tqdm(list(data_bs.find_all("Record"))):
+args = argparse.ArgumentParser()
+args.add_argument("-n", type=int, default=0, help="Continue from")
+args = args.parse_args()
+
+for record in tqdm(list(data_bs.find_all("Record"))[args.n:]):
     lang = record.find("Field", attrs={"Name": "Language"}).text
     abstract_cs = record.find("Field", attrs={"Name": "CzechAbstract"}).text
     abstract_en = record.find("Field", attrs={"Name": "EnglishAbstract"}).text
@@ -53,7 +58,7 @@ for record in tqdm(list(data_bs.find_all("Record"))):
 
     print("Searching for:", title_en)
     paper_data = sch_utils.paper_search(title_en)
-    time.sleep(5)
+    time.sleep(8)
     paper_sames = [
         x for x in paper_data
         if sch_utils.is_same_paper(x["title"], title_en)
@@ -78,7 +83,7 @@ for record in tqdm(list(data_bs.find_all("Record"))):
     })
 
     # constatly overwrite
-    with open("data_raw/publications.jsonl", "w") as f:
+    with open(f"data_raw/publications_{args.n}.jsonl", "w") as f:
         f.write("\n".join([
             json.dumps(x, ensure_ascii=False)
             for x in data

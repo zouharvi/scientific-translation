@@ -39,7 +39,7 @@ def crawl_until_exhausted(papers, paper_ids=set(), total=30, depth=0):
     # print("Crawling", len(papers), "papers")
     for paper in papers:
         refs = paper_references(paper["paperId"], limit=total)
-        time.sleep(3)
+        time.sleep(5)
 
         for new_x in refs:
             if new_x["paperId"] in paper_ids:
