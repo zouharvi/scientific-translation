@@ -14,3 +14,7 @@ Decoder stacktrace:
 - `generate` of `GeneratorHubInterface` in `fairseq/hub_utils.py` calls `self.task.build_generator`
 - `build_generator` of `FairseqTask` in `fairseq/tasks/fairseq_task.py` builds `search.BeamSearch`
 - `step` of `BeamSearch` in `fairseq/search.py` does the search
+
+Pipeline:
+- `translate_synth.py`
+- `translate_contrast.py`
