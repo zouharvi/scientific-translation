@@ -3,7 +3,7 @@
 import argparse
 import json
 import matplotlib.pyplot as plt
-import fig_utils
+import figures.fig_utils as fig_utils
 from utils import text_to_vocab
 
 args = argparse.ArgumentParser()
